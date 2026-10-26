@@ -1,86 +1,87 @@
-# Fact Knowledge Layer: Evidence-First Document Intelligence
+# TruthGuard: Fact Knowledge Layer
 
-An evidence-first, document-agnostic Fact Knowledge Layer built with **Python (FastAPI)** and **React (Vite)**.
+> **Evidence-First Multi-Document Intelligence & Verification Engine**
 
-The system ingests PDF documents, extracts meaningful numerical and semantic facts, preserves their source evidence and provenance, normalizes values and contexts, and identifies relationships between facts across documents.
+[![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg?logo=python&logoColor=white)](https://www.python.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.100%2B-009688.svg?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
+[![React](https://img.shields.io/badge/React-18-61DAFB.svg?logo=react&logoColor=black)](https://react.dev/)
+[![Vite](https://img.shields.io/badge/Vite-5-646CFF.svg?logo=vite&logoColor=white)](https://vitejs.dev/)
+[![SQLite](https://img.shields.io/badge/Database-SQLite-003B57.svg?logo=sqlite&logoColor=white)](https://www.sqlite.org/)
 
-The system identifies:
+An evidence-first, document-agnostic **Fact Knowledge Layer** built with **Python (FastAPI)** and **React (Vite)**. 
 
-- Corroborating facts
-- Contradictions
-- Contextual differences
-- Uncertain or potentially unreliable relationships
+The system ingests PDF documents, extracts meaningful numerical and semantic facts, preserves exact source evidence and provenance, normalizes values and contexts, and autonomously determines cross-document relationships.
 
-The goal is not only to extract facts, but also to make every result traceable back to the original document evidence.
+### Core Capabilities
+
+- **Corroborating Facts**: Identifies facts across documents that validate each other even when expressed differently.
+- **Contradiction Detection**: Flags conflicting claims with comparable scope and context.
+- **Contextual Differentiation**: Disentangles discrepancies arising from temporal changes, scope differences, geography, or reporting units.
+- **Uncertainty & Limitation Tracking**: Refrains from guessing when context is insufficient, exposing the uncertainty with full provenance.
+
+Every single extracted claim and relationship remains traceable back to the source page and verbatim textual snippet.
 
 ---
 
 ## Features
 
-- PDF upload through the web UI
-- Automatic PDF text extraction
-- Structured fact extraction
-- Page-level source provenance
-- Original source text retained for every fact
-- Deterministic value normalization
-- Cross-document fact matching
-- Corroboration detection
-- Contradiction detection
-- Context-aware reconciliation
-- Evidence inspection for relationships
-- Duplicate document detection using file hashing
-- SQLite-based persistence
-- REST API through FastAPI
-- React-based interactive interface
+- **Interactive Web Interface**: Clean, responsive UI with multi-document matrix views and comparison modals.
+- **Automated PDF Text Extraction**: Page-aware document parsing using PyMuPDF.
+- **Structured Fact Extraction**: Subjects, predicates, values, units, contexts, documents, and pages extracted deterministically.
+- **Source Evidence & Provenance**: Verbatim source snippet retained for every extracted fact for one-click verification.
+- **Deterministic Value Normalization**: Standardizes currencies, scales (e.g., Crores vs. Millions), date/time periods, and units.
+- **Cross-Document Fact Matching**: Entity & predicate resolution across distinct documents.
+- **Contradiction & Corroboration Engine**: Automated conflict & corroboration scoring.
+- **Context-Aware Reconciliation**: Reconciles apparent conflicts via temporal and scope context.
+- **Q&A Verification Pipeline**: Retriever, synthesizer, precedence resolver, and adversarial critic for evidence-backed question answering.
+- **Document Deduplication**: SHA-256 content hashing prevents redundant ingestion.
+- **SQLite Persistence**: Local, lightweight relational storage for facts, relationships, and evidence.
+- **RESTful API**: Fast and modular FastAPI endpoints.
 
 ---
 
 ## Tech Stack
 
 ### Backend
-
-- Python
-- FastAPI
-- Uvicorn
-- SQLite
-- PyMuPDF
+- **Python 3.10+**
+- **FastAPI** — High-performance asynchronous REST API
+- **Uvicorn** — ASGI web server
+- **PyMuPDF (`fitz`)** — PDF document processing & text extraction
+- **SQLite** — Relational storage for documents, facts, and relationships
 
 ### Frontend
+- **React 18** — Component-driven interactive user interface
+- **Vite 5** — Modern frontend build tooling
+- **Vanilla CSS** — Custom responsive styling with glassmorphism and data visualization
 
-- React
-- Vite
-- JavaScript
-- CSS
-
-### Development
-
-- Git
-- GitHub
-- AI-assisted development tools for implementation, debugging, testing, and documentation
+### Development & Tools
+- **Git & GitHub** — Version control and repository hosting
+- **Pytest** — Backend unit and integration test suite
 
 ---
 
 ## Setup and Run Instructions
 
 ### Prerequisites
+Ensure the following tools are installed on your machine:
+- **Python 3.10+**
+- **Node.js 18+** & **npm**
+- **Git**
 
-Make sure the following are installed:
-
-- Python 3.10+
-- Node.js 18+
-- npm
-- Git
+---
 
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/kopalkhare2/SuperJoin-assignment.git
-cd SuperJoin-assignment
+git clone https://github.com/tanishkrit/Virtusa---Jatayu.git
+cd Virtusa---Jatayu
 ```
+
+---
 
 ### 2. Start the Backend
 
-Open a terminal:
+Open a terminal in the project root:
 
 ```bash
 cd backend
@@ -88,15 +89,17 @@ python -m pip install -r requirements.txt
 python main.py
 ```
 
-The backend runs at:
-
+The backend API will start and be accessible at:
 ```text
 http://localhost:8000
 ```
+Interactive OpenAPI documentation is available at: `http://localhost:8000/docs`
+
+---
 
 ### 3. Start the Frontend
 
-Open another terminal:
+Open a second terminal in the project root:
 
 ```bash
 cd frontend
@@ -104,270 +107,195 @@ npm install
 npm run dev
 ```
 
-The frontend runs at:
-
+The frontend application will start and be accessible at:
 ```text
 http://localhost:5173
 ```
 
-Open the frontend URL in a browser.
+Open `http://localhost:5173` in your browser.
 
-### 4. Process PDFs
+---
 
-Upload one or more PDF documents through the UI.
+### 4. Process PDFs & Run Verifications
 
-The system processes the documents through the extraction and reasoning pipeline and displays:
-
-1. Extracted facts
-2. Source documents
-3. Page numbers
-4. Original source evidence
-5. Cross-document relationships
-
-The application is designed to accept additional PDFs rather than relying on the filenames or facts of the starter dataset.
+1. Upload one or more PDF files via the web UI (pre-packaged sample documents are available in `data/demos/`).
+2. The processing pipeline runs extraction, normalization, and relationship reasoning automatically.
+3. Review:
+   - **Extracted Facts**: Structured values, units, and metrics.
+   - **Provenance & Evidence**: Page number and verbatim text highlight.
+   - **Relationship Matrix**: Pairwise comparisons identifying corroborations, contradictions, and contextual variances.
+   - **Interactive Q&A**: Ask multi-document verification questions and receive evidence-backed answers.
 
 ---
 
 ## Architecture
 
 ```text
-PDF Documents
-      |
-      v
-+------------------+
-|  PDF Processor   |
-|     PyMuPDF      |
-+------------------+
-      |
-      v
-+------------------+
-| Fact Extraction  |
-+------------------+
-      |
-      v
-+----------------------+
-| Fact Validation &    |
-| Normalization        |
-+----------------------+
-      |
-      v
-+----------------------+
-|       SQLite         |
-| Facts + Evidence     |
-+----------------------+
-      |
-      v
-+----------------------+
-| Fact Matching &      |
-| Relationship Engine  |
-+----------------------+
-      |
-      +----------------+----------------+
-      |                |                |
-      v                v                v
-Corroboration    Contradiction    Contextualization
-      |                |                |
-      +----------------+----------------+
-                       |
-                       v
-                  FastAPI API
-                       |
-                       v
-                    React UI
+       PDF Documents
+             |
+             v
++--------------------------+
+|       PDF Processor      |
+|         (PyMuPDF)        |
++--------------------------+
+             |
+             v
++--------------------------+
+|      Fact Extraction     |
+|   (Regex, Rules, Layout) |
++--------------------------+
+             |
+             v
++--------------------------+
+|    Fact Validation &     |
+|       Normalization      |
++--------------------------+
+             |
+             v
++--------------------------+
+|          SQLite          |
+|    (Facts + Evidence)    |
++--------------------------+
+             |
+             v
++--------------------------+
+|      Fact Matching &     |
+|    Relationship Engine   |
++--------------------------+
+             |
+     +-------+--------+
+     |                |                |
+     v                v                v
+Corroboration   Contradiction   Contextualization
+     |                |                |
+     +-------+--------+
+             |
+             v
++--------------------------+
+|    Q&A & Critic Pipeline |
+|  (Retriever/Synthesizer) |
++--------------------------+
+             |
+             v
+        FastAPI API
+             |
+             v
+         React UI
 ```
 
 ---
 
-## Approach
+## Pipeline Approach
 
 ### 1. Document Processing
-
-Each uploaded PDF is processed using PyMuPDF.
-
-For every page, the system extracts text while retaining the page number. This allows extracted facts to remain connected to the exact location from which they originated.
+Uploaded PDFs are processed page-by-page using PyMuPDF. Text is extracted while retaining page indices and bounding coordinates, ensuring facts remain tied to exact visual and textual provenance.
 
 ### 2. Fact Extraction
+The extraction layer identifies key numerical and semantic business metrics (e.g., Revenue, Headcount, Shipments, Operational Centers). Each fact captures:
+- `Subject` & `Predicate`
+- `Value` & `Normalized Value`
+- `Unit` (e.g., Cr, Million, %)
+- `Context` (Time period, geography, segment)
+- `Source Document` & `Page Number`
+- `Verbatim Evidence Snippet`
 
-The extraction layer identifies useful numerical and semantic claims from document text.
-
-Each fact is represented using structured fields such as:
-
-- Subject
-- Predicate
-- Value
-- Unit
-- Context
-- Document
-- Page
-- Source evidence
-
-The system also performs validation to reduce false positives caused by PDF layouts, tables, dates, CIN numbers, addresses, postal codes, and other numeric fragments that can resemble meaningful facts.
+Filtering heuristics eliminate false positives such as table headers, CIN numbers, pin codes, and address lines.
 
 ### 3. Evidence and Provenance
+Rather than detached numbers, provenance is stored as an immutable attribute of each fact. Every output is directly verifiable by human auditors through the source text viewer.
 
-A core design decision was to treat provenance as part of the fact itself.
-
-Instead of storing only:
-
-```text
-Revenue = ₹8,142 Cr
-```
-
-the system retains the document, page, and original source text associated with the fact.
-
-This makes extracted information inspectable and allows users to verify the system's output against the original document.
-
-### 4. Normalization
-
-Documents frequently express the same information using different units or formats.
-
-The system therefore normalizes values where possible, including:
-
-- Numeric scales
-- Units
-- Currency representations
-- Dates
-- Context and scope
-
-This allows relationships to be detected even when the original representations differ.
+### 4. Value & Context Normalization
+Metrics expressed across varying formats are normalized:
+- **Scales**: Standardizes Indian numerical systems (Lakhs, Crores) and Western scales (Millions, Billions).
+- **Currencies**: Converts ISO currency codes and symbols (₹, $, USD, INR).
+- **Time/Scope**: Standardizes fiscal years (FY23, FY24) and quarter designations.
 
 ### 5. Cross-Document Reasoning
+The relationship engine performs pairwise comparisons of candidate facts using:
+- Metric compatibility and predicate similarity
+- Normalized value proximity
+- Temporal period and operational scope alignment
+- Evidence confidence
 
-Candidate facts are compared across documents using their semantic dimensions and contextual information.
-
-The relationship engine considers:
-
-- Metric / predicate compatibility
-- Value similarity
-- Units and scale
-- Time period
-- Scope
-- Context
-- Evidence quality
-
-Relationships are classified as:
-
-**Corroboration**
-
-Two facts describe the same underlying information and are consistent after normalization.
-
-**Contradiction**
-
-Two comparable facts refer to the same context but contain materially different values.
-
-**Contextualization**
-
-Two values appear different but the difference can be explained by factors such as time period, scope, or units.
-
-**Uncertainty**
-
-The system cannot confidently determine the relationship and avoids presenting an uncertain result as a definitive conclusion.
+Relationships are categorized into:
+- **Corroboration**: Consistent facts reflecting the same metric and timeframe.
+- **Contradiction**: Divergent values reported for the same metric, entity, and period without qualifying context.
+- **Contextualization**: Different values explained by differing scopes (e.g., Global vs. India division) or reporting periods.
+- **Uncertainty**: Ambiguous signals marked for human review.
 
 ---
 
 ## Required Demonstration Cases
 
-The implementation demonstrates the four cases requested in the assignment.
+The system specifically addresses the core real-world reasoning cases:
 
-### 1. Corroboration
-
-The system identifies information that is consistent across documents even when the values are expressed differently.
-
-### 2. Contradiction
-
-The system flags potentially conflicting facts when they appear to refer to the same metric and context.
-
-The UI allows the user to inspect the underlying evidence before deciding whether the difference represents a genuine contradiction.
-
-### 3. Contextual Difference
-
-The system distinguishes differences caused by context.
-
-For example, two documents may report different customer counts because they describe different reporting periods. Instead of treating the values as automatically contradictory, the relationship engine considers the time context.
-
-### 4. Extraction / Reasoning Failure
-
-PDFs can contain complex tables, formatting, footnotes, and numbers that resemble facts.
-
-During development, extraction errors were identified where numeric fragments or table values could be incorrectly interpreted as business facts.
-
-Validation rules and predicate/context checks were added to reduce these errors.
-
-The system also preserves the original evidence so that questionable results can be inspected rather than treated as unquestionable truth.
+1. **Corroboration**: Identifies identical underlying metrics expressed across different documents or differing representations.
+2. **Contradiction**: Flags genuine discrepancies in claims for the same entity and timeframe, providing side-by-side evidence inspection.
+3. **Contextual Difference**: Accurately recognizes when numbers differ because one document describes a distinct quarter or regional segment rather than false conflict.
+4. **Extraction / Reasoning Limitations**: Gracefully flags complex tables, ambiguous phrases, or unsupported statements, preserving human-in-the-loop auditability.
 
 ---
 
 ## Video Demo
 
-### Demo Video
+📺 **[Watch the Demo Video on YouTube](https://youtu.be/AWUER__R0hc)**
 
-[Watch the demo video on YouTube](https://youtu.be/AWUER__R0hc)
-
-The demo shows:
-
-- PDF processing
-- Fact extraction
-- Source evidence and provenance
-- Cross-document corroboration
-- Context-based differences
-- Contradiction detection
-- Evidence inspection
-- Handling of extraction/reasoning limitations
-- Uploading additional PDF documents
-
----
-
-## Limitations and Next Steps
-
-### Current Limitations
-
-- PDF extraction quality depends on document layout and text quality.
-- Highly complex tables can still produce ambiguous extraction results.
-- Semantic matching is currently based primarily on deterministic rules and normalized fact dimensions.
-- Some relationships may require human verification when the available context is insufficient.
-- The prototype is optimized for understandable behavior rather than large-scale production workloads.
-
-### Next Steps
-
-Potential improvements include:
-
-- Better table-aware PDF extraction
-- More advanced semantic similarity for fact matching
-- Confidence calibration based on historical extraction quality
-- Improved handling of long and complex PDFs
-- Incremental document processing at larger scale
-- More sophisticated temporal and scope reasoning
-- Additional visualization of the fact relationship graph
-- More extensive automated evaluation using unseen document sets
+The walkthrough demonstrates:
+- End-to-end PDF ingestion and automated fact extraction
+- Verbatim source evidence inspection
+- Cross-document corroboration and contradiction detection
+- Context-based difference resolution
+- Q&A synthesis with adversarial critic verification
 
 ---
 
 ## Project Structure
 
 ```text
-SuperJoin-assignment/
+Virtusa---Jatayu/
 │
 ├── backend/
-│   ├── main.py
-│   ├── routes.py
-│   ├── storage.py
-│   ├── pdf_processor.py
-│   ├── fact_extractor.py
-│   ├── matcher.py
-│   ├── relationship_engine.py
-│   └── ...
+│   ├── app/
+│   │   ├── api/
+│   │   │   └── routes.py              # REST API endpoints
+│   │   ├── db/
+│   │   │   └── storage.py             # SQLite database manager
+│   │   ├── models/
+│   │   │   ├── schemas.py             # Data models for facts & relations
+│   │   │   └── qa_schemas.py          # Q&A pipeline schemas
+│   │   └── services/
+│   │       ├── pdf_processor.py       # PyMuPDF text extractor
+│   │       ├── fact_extractor.py      # Fact extraction engine
+│   │       ├── normalizer.py          # Units & values normalization
+│   │       ├── matcher.py             # Metric matching
+│   │       ├── relationship_engine.py # Corroboration & contradiction logic
+│   │       ├── consensus_engine.py    # Multi-source consensus resolver
+│   │       └── qa/                    # Verification Q&A pipeline
+│   │           ├── retriever.py
+│   │           ├── synthesizer.py
+│   │           ├── precedence.py
+│   │           ├── critic.py
+│   │           └── orchestrator.py
+│   ├── tests/                         # Backend test suite
+│   ├── main.py                        # FastAPI application entrypoint
+│   └── requirements.txt               # Python dependencies
 │
 ├── frontend/
 │   ├── src/
+│   │   ├── components/                # UI components (Explorer, Matrix, Q&A)
+│   │   ├── App.jsx                    # Root application component
+│   │   ├── App.css                    # Component styles
+│   │   ├── index.css                  # Design system tokens & base styles
+│   │   └── api.js                     # Backend API client
 │   ├── package.json
-│   └── ...
+│   └── vite.config.js
 │
 ├── data/
-│   └── demos/
+│   └── demos/                         # Sample demonstration PDFs
 │
-├── goal.md
-├── package.json
-├── README.md
+├── goal.md                            # System specifications & requirements
+├── package.json                       # Root scripts
+├── README.md                          # Project documentation
 └── .gitignore
 ```
 
@@ -375,18 +303,13 @@ SuperJoin-assignment/
 
 ## Additional Notes
 
-- The system is intentionally document-agnostic and does not depend on hard-coded facts from the starter PDFs.
-- Uploaded documents are deduplicated using their content hash.
-- Source evidence is retained alongside extracted facts to support verification.
-- The implementation prioritizes explainability and traceability over treating every extracted value as automatically correct.
-- The starter dataset consists of the three Delhivery documents provided with the assignment.
-- No credentials or paid API keys are required to run the project.
-- The project was developed and tested locally using the setup instructions above.
+- **Document-Agnostic**: Operates dynamically on arbitrary uploaded PDFs without hardcoded document assumptions.
+- **Zero API Keys Required**: Fully functional offline without requiring external paid API subscriptions.
+- **Auditability First**: Designed to prioritize transparency and provenance over black-box outputs.
 
 ---
 
 ## Links
 
-- **GitHub Repository:** https://github.com/kopalkhare2/SuperJoin-assignment
-- **Demo Video:** https://youtu.be/AWUER__R0hc#   V i r t u s a - - - J a t a y u  
- 
+- **GitHub Repository**: [https://github.com/tanishkrit/Virtusa---Jatayu](https://github.com/tanishkrit/Virtusa---Jatayu)
+- **Demo Video**: [Watch on YouTube](https://youtu.be/AWUER__R0hc)
